@@ -18,10 +18,8 @@ const Home = ({blogs, products, collections}) => {
             </Head>
 
             <Slider animate={true} data={sliderData}/>
-
-            {/* <Categories categories={collections}/> */}
-
-            <ProductsTab products={products} limit={8}/>
+            <Categories categories={collections}/>
+            {/* <ProductsTab products={products} limit={8}/> */}
 
             <Promotions/>
 
@@ -42,10 +40,10 @@ export const getStaticProps = async () => {
         //products = productsData?.products?.edges,
         blogs = null,
        // productsData = null,
-        products = productsData?.allProducts,
-        collectionsData = null,
-        collections = null;
-        console.log(productsData)
+        products = productsData?.allProducts;
+        const collectionsData = await client(collectionsQuery(50),'getCategories/');
+        const collections = collectionsData?.allCategories;
+        console.log(collections)
 
     return {
         props: {

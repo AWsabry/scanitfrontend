@@ -8,7 +8,7 @@ import EmptyProduct from "@components/ui/empty";
 
 const Categories = ({categories, className, ...props}) => {
     const settings = {
-        loop: true,
+        loop: false,
         slidesPerView: 2,
         spaceBetween: 5,
         autoplay: false,
@@ -38,22 +38,25 @@ const Categories = ({categories, className, ...props}) => {
             {...props}
         >
             <Container>
-                {-1 > 0 ? (
+                <h2 style={{textAlign:'center', fontSize: 30}}>Categories</h2>
+                {categories.length ? (
                     <Slider
                         settings={settings}
                     >
-                        {categories?.map(({node: category}) => (
+                        {categories?.map((category) => {
+                            return (
                             <Slide key={category?.id}>
                                 <Category
-                                    category={category?.title}
-                                    icon={category?.image?.originalSrc}
-                                    slug={`/collection/${category?.handle}`}
+                                    category={category.CategoryName}
+                                    icon={`http://api.3dscanit.org/uploads/${category.image}`}
+                                    slug={`/categories/${category.categorySlug}`}
                                 />
                             </Slide>
-                        ))}
+                        )}
+                        )}
                     </Slider>
                 ) : (
-                    <EmptyProduct className="mt-0" message="Collections not found!"/>
+                    <EmptyProduct className="mt-0" message="Categories not found!"/>
                 )}
             </Container>
         </CategoriesWrap>

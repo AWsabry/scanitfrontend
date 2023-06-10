@@ -8,7 +8,6 @@ import {ErrorPage} from "@assets/css/global.style";
 
 const Error404Page = () => {
     const router = useRouter();
-
     return (
         <div>
             <Head>
@@ -24,7 +23,7 @@ const Error404Page = () => {
                         height={115}
                         alt="ScanIt 404 Error Page"
                     />
-                    <h3>That Page Can’t be found!</h3>
+                    <h3>This page was not found!</h3>
                     <p>It looks like nothing was found at this location.</p>
                     <Button
                         mt="35px"

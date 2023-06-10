@@ -5,25 +5,11 @@ const collectionsQuery = (limit = 10) => {
 
     return gql`
     query {
-        allProducts {
+        allCategories {
           id
-          name
-          ArabicName
-          vendor {
-            id
-          }
+          CategoryName
           image
-          productSlug
-          description
-          price
-          category {
-            id
-          }
-          active
-          MostPopular
-          NewProducts
-          BestOffer
-          created
+          categorySlug
         }
       }
     `

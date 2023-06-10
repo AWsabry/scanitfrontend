@@ -32,18 +32,33 @@ const DownloadForm = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const downloadFiles = async (urls) => {
-        const promises = urls.map(async (url) => {
-          const res = await fetch(url);
-          const fileName = url.substring(url.lastIndexOf('/') + 1);
-          const blob = await res.blob();
-          const link = document.createElement('a');
-          link.href = window.URL.createObjectURL(new Blob([blob]));
-          link.setAttribute('download', fileName);
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+        
+        // SEND DATA TO THE BACKEND
+
+        // DOWNLOAD THE FILE
+        urls.forEach(url => {
+            window.open(url);
         });
-        await Promise.all(promises);
+
+        // const promises = urls.map(async (url) => {
+        //   const res = await fetch(url,{
+        //     method: 'GET',
+        //     headers: {
+        //         "Access-Control-Allow-Origin": "*",
+        //         "Access-Control-Allow-Credentials": true,
+        //         "Access-Control-Allow-Methods": "GET"
+        //     }
+        //   });
+        //   const fileName = url.substring(url.lastIndexOf('/') + 1);
+        //   const blob = await res.blob();
+        //   const link = document.createElement('a');
+        //   link.href = window.URL.createObjectURL(new Blob([blob]));
+        //   link.setAttribute('download', fileName);
+        //   document.body.appendChild(link);
+        //   link.click();
+        //   document.body.removeChild(link);
+        // });
+        // await Promise.all(promises);
       };
       
     const onInputChange = e => {
@@ -88,10 +103,10 @@ const DownloadForm = () => {
         }
 
         
-            if (formData.policy) {
-                setIsLoading(true);
-                downloadFiles(imageUrls);
-            }
+        if (formData.policy) {
+            setIsLoading(true);
+            downloadFiles(imageUrls);
+        }
         
         setIsLoading(false);
         

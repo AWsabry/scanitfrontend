@@ -25,7 +25,6 @@ const HomeTwo = ({blogs, products, collections}) => {
             />
 
            {/*  <Categories categories={null}/> */}
-
             <ProductsTab products={null} limit={8}/>
 
             <Promotions fluid={true}/>
