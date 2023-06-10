@@ -1,19 +1,11 @@
 import { gql } from "graphql-request";
 
-const collectionQuery = (handle, sortKey, reverse, limit = 100) => {
-  const queryArguments = `handle: "${handle}"`;
-  let queryProductArguments = `first: ${limit}`;
-
-  if (sortKey) {
-    queryProductArguments = `first: ${limit}, sortKey: ${sortKey}, reverse: ${reverse}`;
-  }
-
+const collectionQuery = (slug) => {
   return gql`
   query {
-      getProduct(id: "${id}") {
+      getProductsByCategory(categorySlug: "${slug}") {
         id
         name
-        ArabicName
         vendor {
           id
         }

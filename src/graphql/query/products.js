@@ -16,7 +16,6 @@ const productsQuery = (limit = 200, sortKey, reverse, search) => {
         allProducts {
           id
           name
-          ArabicName
           vendor {
             id
           }

@@ -7,13 +7,13 @@ const productQuery = (id) => {
         getProduct(id: "${id}") {
           id
           name
-          ArabicName
           vendor {
             id
           }
           productSlug
           description
           image
+          solidFile
           price
           category {
             id

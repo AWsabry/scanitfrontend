@@ -8,7 +8,6 @@ const customerQuery = (customerAccessToken) => {
       allProducts {
         id
         name
-        ArabicName
         vendor {
           id
         }
