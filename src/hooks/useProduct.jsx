@@ -13,6 +13,7 @@ const useProduct = (product) => {
     const [sku, setSku] = useState();
     const [size, setSize] = useState();
     const [color, setColor] = useState();
+    const [file, setFile] = useState();
     const [material, setMaterial] = useState();
     const [stock, setStock] = useState(0);
     const [price, setPrice] = useState(0);
@@ -86,6 +87,7 @@ const useProduct = (product) => {
         setMaterial(variants[0]?.selectedOptions[2]?.value);
         setVariations({id: variants[0]?.id, title: variants[0]?.name, handel: variants[0]?.name});
         setCompareAtPrice(variants[0]?.compareAtPriceV2 ? variants[0]?.compareAtPriceV2?.amount : 0);
+        setFile(variants[0]?.sku);
     }, []);
 
     return {
@@ -94,6 +96,7 @@ const useProduct = (product) => {
         price,
         stock,
         color,
+        file,
         isStock,
         material,
         isInCart,

@@ -25,7 +25,8 @@ const defaultValue = {
 const DownloadForm = () => {
     let cart = useSelector(state => state.shoppingCart);
     cart = Object.values(cart)
-    const imageUrls = cart.map(item => 'http://api.3dscanit.org/uploads/'+item.image);
+    console.log(cart);
+    const imageUrls = cart.map(item => 'http://api.3dscanit.org/uploads/'+item.file);
     const router = useRouter();
     const [error, setError] = useState([]);
     const [formData, setFormData] = useState(defaultValue);

@@ -13,7 +13,7 @@ const productQuery = (id) => {
           productSlug
           description
           image
-          solidFile
+          file
           price
           category {
             id
