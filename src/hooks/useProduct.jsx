@@ -6,9 +6,7 @@ import {addToWishlistAction, removeWishlistAction,} from "@global/actions/wishli
 import {getCartProduct, getCartProductQuantity, getWishCompareProduct} from "@utils/product";
 
 const useProduct = (product) => {
-    console.log(product,"test");
     const variants = product;
-    console.log(product,"test1");
 
     const [sku, setSku] = useState();
     const [size, setSize] = useState();
@@ -87,7 +85,7 @@ const useProduct = (product) => {
         setMaterial(variants[0]?.selectedOptions[2]?.value);
         setVariations({id: variants[0]?.id, title: variants[0]?.name, handel: variants[0]?.name});
         setCompareAtPrice(variants[0]?.compareAtPriceV2 ? variants[0]?.compareAtPriceV2?.amount : 0);
-        setFile(variants[0]?.sku);
+        setFile(variants[0]?.file);
     }, []);
 
     return {

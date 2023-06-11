@@ -23,6 +23,7 @@ const productsQuery = (limit = 200, sortKey, reverse, search) => {
           productSlug
           description
           price
+          file
           category {
             id
             CategoryName

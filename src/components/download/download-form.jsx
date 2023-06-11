@@ -10,22 +10,22 @@ import {previewModeNotification} from "@utils/constant";
 import {FormWrap, AlertMessage} from "@components/auth/auth.style";
 import {client, customerAccessTokenCreate, customerCreate} from "@graphql";
 import {InputField, InputNote} from "@components/checkout/checkout-form.style";
+import axios from "axios";
 
 
 const defaultValue = {
     email: "",
     phone: "",
-    password: "",
     policy: false,
     last_name: "",
     first_name: "",
-    confirm_password: ""
+    city: "",
+    address: "",
 }
 
 const DownloadForm = () => {
     let cart = useSelector(state => state.shoppingCart);
     cart = Object.values(cart)
-    console.log(cart);
     const imageUrls = cart.map(item => 'http://api.3dscanit.org/uploads/'+item.file);
     const router = useRouter();
     const [error, setError] = useState([]);
@@ -33,33 +33,10 @@ const DownloadForm = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const downloadFiles = async (urls) => {
-        
-        // SEND DATA TO THE BACKEND
-
         // DOWNLOAD THE FILE
         urls.forEach(url => {
             window.open(url);
         });
-
-        // const promises = urls.map(async (url) => {
-        //   const res = await fetch(url,{
-        //     method: 'GET',
-        //     headers: {
-        //         "Access-Control-Allow-Origin": "*",
-        //         "Access-Control-Allow-Credentials": true,
-        //         "Access-Control-Allow-Methods": "GET"
-        //     }
-        //   });
-        //   const fileName = url.substring(url.lastIndexOf('/') + 1);
-        //   const blob = await res.blob();
-        //   const link = document.createElement('a');
-        //   link.href = window.URL.createObjectURL(new Blob([blob]));
-        //   link.setAttribute('download', fileName);
-        //   document.body.appendChild(link);
-        //   link.click();
-        //   document.body.removeChild(link);
-        // });
-        // await Promise.all(promises);
       };
       
     const onInputChange = e => {
@@ -87,25 +64,26 @@ const DownloadForm = () => {
     const onFormSubmit = (e) => {
         e.preventDefault();
         const target = e.target;
-        const variables = {
-            input: {
-                PhoneNumber: formData.phone,
-                email: formData.email,
-                password: formData.password,
-                lastName: formData.last_name,
-                firstName: formData.first_name
-            }
+        const input = {
+            PhoneNumber: formData.phone,
+            email: formData.email,
+            lastName: formData.last_name,
+            firstName: formData.first_name,
+            city: formData.city,
+            address: formData.address,
+            product: 1,
+            vendor: 1,
+            category: 1
         }
-        const loginVariables = {
-            input: {
-                email: formData.email,
-                password: formData.password
-            }
-        }
-
         
         if (formData.policy) {
             setIsLoading(true);
+            // Send the request to backend
+            axios.post('http://api.3dscanit.org/orders', input)
+            .then((response) => {
+            }, (error) => {
+            });
+            // Download the files
             downloadFiles(imageUrls);
         }
         
@@ -168,7 +146,26 @@ const DownloadForm = () => {
                                     placeholder="E.164 standard. ex: +16135551111."
                                 />
                             </InputField>
-
+                            <InputField>
+                                <Input
+                                    id="city"
+                                    name="city"
+                                    label="City *"
+                                    required={true}
+                                    onChange={onInputChange}
+                                    placeholder="Cairo"
+                                />
+                            </InputField>
+                            <InputField>
+                                <Input
+                                    id="address"
+                                    name="address"
+                                    label="Address *"
+                                    required={true}
+                                    onChange={onInputChange}
+                                    placeholder="Cairo"
+                                />
+                            </InputField>
                            
 
                             <InputField>

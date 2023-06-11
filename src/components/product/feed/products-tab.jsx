@@ -31,7 +31,6 @@ const productNav = [
 
 const ProductsTab = ({products, limit = 8, className}) => {
     const [data, setData] = useState(products);
-
     const onHandler = (event) => {
         const target = event.target;
         const key = target.dataset.key

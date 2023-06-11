@@ -13,6 +13,7 @@ const collectionQuery = (slug) => {
         description
         image
         price
+        file
         category {
           id
         }

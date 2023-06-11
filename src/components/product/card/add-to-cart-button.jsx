@@ -22,7 +22,7 @@ const AddToCartButton = ({isShowInMobile, product}) => {
         if (!isInCart) {
             dispatch(addToCartAction(rest));
             cogoToast.success(
-                `${rest?.title} is added to cart.`, {
+                `${rest?.name} is added to cart.`, {
                     position: "top-right",
                     heading: "Successfully Add!",
                     hideAfter: 1
@@ -30,7 +30,7 @@ const AddToCartButton = ({isShowInMobile, product}) => {
             );
         } else {
             cogoToast.warn(
-                `${rest?.title} is already added.`, {
+                `${rest?.name} is already added.`, {
                     position: "top-right",
                     heading: "Already Added!",
                     hideAfter: 1

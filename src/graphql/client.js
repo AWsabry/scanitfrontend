@@ -7,7 +7,6 @@ const client = async (query,prefix) => {
     const graphQLClient = new GraphQLClient(endpoint, {
         headers: {
             "Content-Type": "application/json",
-           
         }
     });
 
