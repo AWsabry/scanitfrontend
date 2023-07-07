@@ -22,11 +22,12 @@ const productsQuery = (limit = 200, sortKey, reverse, search) => {
           image
           productSlug
           description
-          price
           file
-          category {
+          startFrom
+          reachTo
+          SubCategory {
             id
-            CategoryName
+            SubCategoryName
           }
           active
           MostPopular

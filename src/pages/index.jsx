@@ -1,13 +1,12 @@
 import Head from "next/head";
 import Layout from "@components/layout";
 import settings from "@data/settings.json";
-import LatestBlog from "@components/blog/posts";
 import Promotions from "@components/promotions";
 import Categories from "@components/categories";
 import sliderData from "@data/slider/home-1.json";
-import {ProductsTab} from "@components/product/feed";
 import {SliderOne as Slider} from "@components/slider";
 import {client, blogsQuery, productsQuery, collectionsQuery} from "@graphql";
+import HomepageVideo from "@components/HomepageVideo";
 
 const Home = ({blogs, products, collections}) => {
     return (
@@ -18,6 +17,7 @@ const Home = ({blogs, products, collections}) => {
             </Head>
 
             <Slider animate={true} data={sliderData}/>
+            <HomepageVideo />
             <Categories categories={collections}/>
             {/* <ProductsTab products={products} limit={8}/> */}
 
@@ -43,7 +43,6 @@ export const getStaticProps = async () => {
         products = productsData?.allProducts;
         const collectionsData = await client(collectionsQuery(50),'getCategories/');
         const collections = collectionsData?.allCategories;
-        console.log(collections)
 
     return {
         props: {

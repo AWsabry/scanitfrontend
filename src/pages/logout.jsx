@@ -12,6 +12,9 @@ const Logout = () => {
     useEffect(() => {
         dispatch(saveCustomerData({}));
         Cookies.remove("access_token");
+        Cookies.remove("user_name");
+        Cookies.remove("user_email");
+        Cookies.remove("download_limit");
         router.push("/");
     }, []);
 

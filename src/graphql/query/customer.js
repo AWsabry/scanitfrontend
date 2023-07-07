@@ -14,8 +14,7 @@ const customerQuery = (customerAccessToken) => {
         image
         productSlug
         description
-        price
-        category {
+        SubCategory {
           id
         }
         active

@@ -11,7 +11,7 @@ const ProductDetails = ({product, ...props}) => {
                 <Row>
                     <Col md={6} lg={5}>
                         <ProductDetailsThumb
-                            thumbnails={product?.getProduct?.image}
+                            thumbnails={product.image}
                         />
                     </Col>
 

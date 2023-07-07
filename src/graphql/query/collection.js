@@ -3,8 +3,8 @@ import { gql } from "graphql-request";
 const collectionQuery = (slug) => {
   return gql`
   query {
-      getProductsByCategory(categorySlug: "${slug}") {
-        id
+    getProductsByCategory(subCategorySlug:"${slug}") {
+       id
         name
         vendor {
           id
@@ -12,10 +12,15 @@ const collectionQuery = (slug) => {
         productSlug
         description
         image
-        price
         file
-        category {
+        startFrom
+        reachTo
+        SubCategory {
           id
+          SubCategoryName
+          subCategorySlug
+          image
+          active
         }
         active
         MostPopular

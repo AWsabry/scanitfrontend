@@ -8,14 +8,14 @@ const DownloadPage = () => {
     return (
         <Layout>
             <Head>
-                <title>{"Download :: " + settings?.title}</title>
+                <title>{"Request Code :: " + settings?.title}</title>
                 <meta name="description" content={settings?.title}/>
             </Head>
 
             <Breadcrumb
                 py={[40, 80]}
                 mb={[60, null, 100]}
-                pageTitle="Download Page"
+                pageTitle="Request Code"
             />
 
             <DownloadForm/>

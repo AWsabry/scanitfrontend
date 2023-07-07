@@ -9,10 +9,13 @@ import Checkbox from "@components/ui/checkout";
 import {Col, Container, Form, Row} from "@bootstrap"
 import {previewModeNotification} from "@utils/constant";
 import {FormWrap, AlertMessage} from "@components/auth/auth.style";
-import {client, customerAccessTokenCreate, customerCreate} from "@graphql";
 import {InputField, InputNote} from "@components/checkout/checkout-form.style";
+import axios from "axios";
+import {totalDays} from "@utils/method";
 
-
+const headers = {
+    'Content-Type': 'application/json',
+}
 const defaultValue = {
     email: "",
     phone: "",
@@ -55,13 +58,12 @@ const SignupForm = () => {
         e.preventDefault();
         const target = e.target;
         const variables = {
-            input: {
-                PhoneNumber: formData.phone,
-                email: formData.email,
-                password: formData.password,
-                lastName: formData.last_name,
-                firstName: formData.first_name
-            }
+            PhoneNumber: formData.phone,
+            email: formData.email,
+            password: formData.password,
+            city: formData.city,
+            last_name: formData.last_name,
+            first_name: formData.first_name
         }
         const loginVariables = {
             input: {
@@ -69,26 +71,36 @@ const SignupForm = () => {
                 password: formData.password
             }
         }
-
         if (formData.password === formData.confirm_password) {
-            if (formData.policy) {
-                setIsLoading(true);
-                client(customerCreate(), variables,true).then(res => {
-                    if (res?.customerCreate?.customerUserErrors) {
-                        setError([]);
-                        setError(res?.customerCreate?.customerUserErrors);
-                    }
-                    if (res?.customerCreate?.customer) {
-                        target.reset();
-                        client(customerAccessTokenCreate(), loginVariables).then(res => {
-                            const token = res?.customerAccessTokenCreate?.customerAccessToken?.accessToken;
-                            Cookie.set('access_token', encode(token));
-                            router.push('/');
-                        })
-                    }
-                    setIsLoading(false);
+            setIsLoading(true);
+            // Send REST api request to the server
+            axios.post('http://api.3dscanit.org/register/', variables, {
+                headers: headers
+            }).then(res => {
+                // Sign the user in
+                axios.post('http://api.3dscanit.org/login/', variables,{
+                    headers: headers
                 })
-            }
+                .then(response => {
+                    setIsLoading(false);
+                    if(response){
+                        const token = response.data.token;
+                        Cookie.set("access_token", encode(token), {expires: totalDays(1)});
+                        router.push("/account");
+                    }
+                    else{
+                        setError([{message: 'Failed to login'}]);
+                    }
+                })
+                .catch(e => {
+                    setError([{message: "Something went wrong"}]);
+                })
+            }).catch(err => {
+                // Show error somewhere
+                setError([{message: err.message}]);
+            });
+            // Disable loading indicator
+            setIsLoading(false);
         } else {
             setError([{message: "Password don't match!"}])
         }
@@ -134,6 +146,17 @@ const SignupForm = () => {
                                     name="email"
                                     type="email"
                                     label="Email *"
+                                    required={true}
+                                    onChange={onInputChange}
+                                />
+                            </InputField>
+
+                            <InputField>
+                                <Input
+                                    id="city"
+                                    name="city"
+                                    type="text"
+                                    label="City *"
                                     required={true}
                                     onChange={onInputChange}
                                 />

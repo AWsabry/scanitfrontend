@@ -1,6 +1,4 @@
 import client from "./client";
-import blogQuery from "./query/blog";
-import blogsQuery from "./query/blogs";
 import productQuery from "./query/product";
 import customerQuery from "./query/customer";
 import productsQuery from "./query/products";
@@ -15,8 +13,6 @@ import customerAccessTokenCreate from "./mutation/customerAccessTokenCreate";
 
 export {
   client,
-  blogQuery,
-  blogsQuery,
   productQuery,
   customerQuery,
   productsQuery,

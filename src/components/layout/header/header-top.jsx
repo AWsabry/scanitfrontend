@@ -1,7 +1,5 @@
 import cn from "classnames";
-import Link from "next/link";
 import PropTypes from "prop-types";
-import Dropdown from "@components/ui/dropdown";
 import {Col, Container, DropdownItem, Row} from "@bootstrap";
 import {HeaderTopWrap, HeaderTopMessage, HeaderTopSetLanCurr} from "@components/layout/header/header.style";
 
@@ -10,28 +8,10 @@ const HeaderTop = ({className}) => {
         <HeaderTopWrap className={cn(className)}>
             <Container>
                 <Row>
-                    <Col md={5} lg={3} className="text-center text-md-left">
-                        <HeaderTopMessage>
+                    <Col md={12} lg={12}>
+                        <HeaderTopMessage className="text-center">
                             Welcome to ScanIt
                         </HeaderTopMessage>
-                    </Col>
-
-                    <Col md={7} lg={9}>
-                        <HeaderTopSetLanCurr className="mt-2 mt-md-0">
-                            <Dropdown heading="English" align="left">
-                                <DropdownItem tag="li"><Link href="/">English</Link></DropdownItem>
-                                <DropdownItem tag="li"><Link href="/">Italiano</Link></DropdownItem>
-                                <DropdownItem tag="li"><Link href="/">Français</Link></DropdownItem>
-                                <DropdownItem tag="li"><Link href="/">Filipino</Link></DropdownItem>
-                            </Dropdown>
-
-                            <Dropdown heading="USD" align="left">
-                                <DropdownItem tag="li"><Link href="/">$ - USD</Link></DropdownItem>
-                                <DropdownItem tag="li"><Link href="/">€ - EUR</Link></DropdownItem>
-                                <DropdownItem tag="li"><Link href="/">£ - POUND </Link></DropdownItem>
-                                <DropdownItem tag="li"><Link href="/">₣ - FRANC</Link></DropdownItem>
-                            </Dropdown>
-                        </HeaderTopSetLanCurr>
                     </Col>
                 </Row>
             </Container>

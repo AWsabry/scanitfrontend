@@ -14,8 +14,9 @@ const productQuery = (id) => {
           description
           image
           file
-          price
-          category {
+          startFrom
+          reachTo
+          SubCategory {
             id
           }
           active

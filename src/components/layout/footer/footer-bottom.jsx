@@ -12,20 +12,9 @@ const FooterBottom = ({bg}) => {
         >
             <Container>
                 <Row className="flex-sm-row-reverse">
-                    <Col md={6} className="text-center text-md-right">
-                        <div className="payment-link">
-                            <Image
-                                src="/images/icons/payment.png"
-                                alt="Payment Method"
-                                width={243}
-                                height={21}
-                            />
-                        </div>
-                    </Col>
-
-                    <Col md={6} className="text-center text-md-left">
-                        <CopyrightText>
-                            © 2021, ScanIt. Made With <IoIosHeart/> by <a className="company-name" href="https://hasthemes.com/"> HasThemes.</a>
+                    <Col md={12}>
+                        <CopyrightText className="text-center">
+                            © 2023, ScanIt | All rights received
                         </CopyrightText>
                     </Col>
                 </Row>

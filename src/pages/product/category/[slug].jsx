@@ -1,29 +1,27 @@
 import Head from "next/head";
-import settings from "@data/settings";
+import settings from "@data/settings.json";
 import Layout from "@components/layout";
 import EmptyProduct from "@components/ui/empty";
-import {client} from "@graphql";
+import {client, collectionQuery} from "@graphql";
 import Breadcrumb from "@components/ui/breadcrumb";
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/router'
-import subcategoriesQuery from "../../graphql/query/subcategories";
-import SubCategories from "@components/subcategories";
-
-const CollectionPage = () => {
+import { useRouter } from 'next/router';
+import ProductsTab from "@components/product/feed/products-tab";
+const ProductsPage = () => {
     const router = useRouter()
     const slug = router.query.slug;
-    const [categories, setCategories] = useState([]);
+    const [products, setProducts] = useState([]);
     // Fetch the products category
     useEffect(async () => {
-        const subcategoriesCollection = await client(subcategoriesQuery(slug), 'get_subCategory_by_category_slug/');
-        setCategories(subcategoriesCollection.getSubcategoriesByCategory)
+        const productsCollection = await client(collectionQuery(slug), 'get_products_by_category_slug/');
+        setProducts(productsCollection.getProductsByCategory)
     }, [slug]);
 
 
     return (
         <Layout>
             <Head>
-                <title>Sub Categories</title>
+                <title>Products</title>
                 <meta name="description" content={settings?.title}/>
             </Head>
             <Breadcrumb
@@ -31,12 +29,12 @@ const CollectionPage = () => {
                 mb={[60, null, 100]}
                 pageTitle="Sub Category"
             />
-            {categories?.length ? (
-                <SubCategories categories={categories}/>
+            {products?.length ? (
+                <ProductsTab products={products} limit={8}/>
             ) : (
                 <EmptyProduct message="There are no categories" />
             )}
         </Layout>
     );
 };
-export default CollectionPage;
+export default ProductsPage;

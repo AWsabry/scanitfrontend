@@ -10,6 +10,8 @@ const collectionsQuery = (limit = 10) => {
           CategoryName
           image
           categorySlug
+          active
+          created
         }
       }
     `

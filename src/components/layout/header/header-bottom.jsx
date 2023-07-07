@@ -3,10 +3,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { useIsLoggedIn } from "@hooks";
 import Logo from "@components/ui/logo";
-import { useSelector } from "react-redux";
 import { Col, Container, Row } from "@bootstrap";
-import { HiOutlineShoppingBag } from "react-icons/hi";
-import { getCartProductsQuantity } from "@utils/product";
 import { AiOutlineMenu, AiOutlineSetting } from "react-icons/ai";
 import { IoPersonOutline, IoSearchOutline } from "react-icons/io5";
 import {
@@ -15,22 +12,21 @@ import {
 } from "@components/ui/dropdown/dropdwon.style";
 import {
   ActionItem,
-  CartItemCount,
   HeaderAction,
   HeaderActionBtn,
   HeaderBottomWrap,
 } from "@components/layout/header/header.style";
+import Cookie from "js-cookie";
+import Button from "@components/ui/button";
 
 const HeaderBottom = ({
   onConfigHandler,
-  onMiniCartHandler,
   onSearchBoxHandler,
   onMobileNavHandler,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const shoppingCart = useSelector((state) => state.shoppingCart);
-  const cartQuantity = getCartProductsQuantity(shoppingCart);
   const isLoggedIn = useIsLoggedIn();
+  const user_name = Cookie.get("user_name");
 
   return (
     <HeaderBottomWrap>
@@ -76,7 +72,6 @@ const HeaderBottom = ({
                   <IoSearchOutline />
                 </HeaderActionBtn>
               </ActionItem>
-
               <ActionItem>
                 <DropdownToggleButton
                   color="#000"
@@ -84,46 +79,40 @@ const HeaderBottom = ({
                   onClick={() => setIsDropdownOpen((prevState) => !prevState)}
                 >
                   <IoPersonOutline />
+                  { isLoggedIn && user_name }
                 </DropdownToggleButton>
+
                 <DropdownMenu
                   align="center"
                   className={isDropdownOpen ? "show" : "hide"}
                 >
                   {isLoggedIn ? (
-                    <li>
-                      <Link href="/account">My Account</Link>
-                    </li>
+                      <li>
+                        <Link href="/logout">Logout</Link>
+                      </li>
                   ) : (
                     <li>
                       <Link href="/signin">Signin</Link>
-                    </li>
-                  )}
-                  <li>
-                    <Link href="/cart">Cart</Link>
-                  </li>
-                  <li>
-                    <Link href="/wishlist">Wishlist</Link>
-                  </li>
-                  <li>
-                    <Link href="/compare">Compare</Link>
-                  </li>
-                  {isLoggedIn && (
-                    <li>
-                      <Link href="/logout">Logout</Link>
+                      <Link href="/signup">Signup</Link>
                     </li>
                   )}
                 </DropdownMenu>
               </ActionItem>
-
-              <ActionItem>
-                <HeaderActionBtn
-                  className="pr-1"
-                  onClick={() => onMiniCartHandler()}
-                >
-                  <HiOutlineShoppingBag />
-                  <CartItemCount>{cartQuantity}</CartItemCount>
-                </HeaderActionBtn>
-              </ActionItem>
+              {(isLoggedIn) && (
+                  <Button
+                      tag="button"
+                      bg="primary"
+                      style={{ padding: 10, fontSize: 15, marginLeft: 45 }}
+                      color="white"
+                      hvrBg="secondary"
+                      onClick={() => {
+                            window.location.href = "/download";
+                          }
+                      }
+                  >
+                    Request Code
+                  </Button>
+              )}
             </HeaderAction>
           </Col>
         </Row>
@@ -134,7 +123,6 @@ const HeaderBottom = ({
 
 HeaderBottom.propTypes = {
   onConfigHandler: PropTypes.func.isRequired,
-  onMiniCartHandler: PropTypes.func.isRequired,
   onSearchBoxHandler: PropTypes.func.isRequired,
   onMobileNavHandler: PropTypes.func.isRequired,
 };

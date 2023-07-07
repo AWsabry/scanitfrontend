@@ -3,18 +3,19 @@ import {useState} from "react";
 import {encode} from "js-base64";
 import {useRouter} from "next/router";
 import Input from "@components/ui/input";
-import {totalDays} from "@utils/method";
 import Button from "@components/ui/button";
 import {Col, Container, Form, Row} from "@bootstrap";
 import axios from "axios";
 import {FormWrap, AlertMessage} from "@components/auth/auth.style";
 import {InputField} from "@components/checkout/checkout-form.style";
+import Link from "next/dist/client/link";
+import {totalDays} from "@utils/method";
 
 const defaultValue = {
     email: "",
     password: "",
 };
-axios.defaults.baseURL = 'http://127.0.0.1:8000/';
+axios.defaults.baseURL = 'http://api.3dscanit.org/';
 
 const SigninForm = () => {
     const router = useRouter();
@@ -23,8 +24,8 @@ const SigninForm = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const headers = {
-        'Content-Type': 'application/json',
-      }
+      'Content-Type': 'application/json',
+    }
 
     const onInputChange = (e) => {
         const target = e.target;
@@ -42,37 +43,24 @@ const SigninForm = () => {
                 password: formData.password,
                    };
         setIsLoading(true);
-        axios.post('login/', variables,{
-            headers: headers
-          })
+            axios.post('login/', variables,{
+                headers: headers
+              })
             .then(response => {
                 setIsLoading(false);
                 if(response){
-                const token =response.Token;
-                const expiresAt =
-                    res?.customerAccessTokenCreate?.customerAccessToken?.expiresAt;
-                Cookie.set("access_token", encode(token), {
-                    expires: totalDays(expiresAt),
-                });
-                router.push("/account");
+                const token = response.data.token;
+                    Cookie.set("access_token", encode(token), {expires: totalDays(1)});
+                    router.push("/");
                 }
                 else{
-                    this.props.history.push('/auth')
-
+                    setError([{message: "Something went wrong"}]);
                 }
-
             })
             .catch(e => {
-
-                setError({
-                    
-                    error: {
-                        error: e.response,
-                        code: e.response
-                    }
-                });
-            }) 
-       
+                setIsLoading(false);
+                setError([{message: e.response.data.detail}]);
+            })
     };
 
     return (
@@ -88,7 +76,6 @@ const SigninForm = () => {
                                     type="email"
                                     label="Email *"
                                     required={true}
-                                  //  value={defaultValue?.email}
                                     onChange={onInputChange}
                                 />
                             </InputField>
@@ -100,7 +87,6 @@ const SigninForm = () => {
                                     type="password"
                                     required={true}
                                     label="Password *"
-                              //      value={defaultValue?.password}
                                     onChange={onInputChange}
                                 />
                             </InputField>
@@ -125,43 +111,21 @@ const SigninForm = () => {
                             <InputField className="mb-0">
                                 <Row>
                                     <Col md={6}>
-                                        <Button
-                                            tag="a"
-                                            type="submit"
-                                            color="white"
-                                            href="/signup"
-                                            hvrColor="dark"
-                                            bg="secondary"
-                                            hvrBg="borderLight"
-                                            className="w-100"
-                                            fontSize="standard"
-                                            textTransform="uppercase"
-                                        >
-                                            Create a account
-                                        </Button>
-                                    </Col>
-
-                                    <Col md={6}>
-                                        <Button
-                                            tag="a"
-                                            href="/"
-                                            color="dark"
-                                            type="submit"
-                                            hvrColor="white"
-                                            bg="borderLight"
-                                            hvrBg="secondary"
-                                            className="w-100 mt-3 mt-sm-0"
-                                            fontSize="standard"
-                                            textTransform="uppercase"
-                                        >
-                                            Forget Password?
-                                        </Button>
+                                        <p>
+                                            <Link href="signup" className="w-100 d-block">
+                                                Create an account
+                                            </Link>
+                                        </p>
+                                        <p>
+                                            <Link href="/" className="w-100 d-block">
+                                                Forget Password?
+                                            </Link>
+                                        </p>
                                     </Col>
                                 </Row>
                             </InputField>
                         </Form>
                     </FormWrap>
-
                     {error.length > 0 && (
                         <AlertMessage
                             mt={3}
