@@ -2,7 +2,6 @@ import { Container } from "@bootstrap";
 import { formatDate } from "@utils/method";
 import { CURRENCY } from "@utils/constant";
 import { Td, Tr, Th, Thead, Tbody, Table } from "@bootstrap";
-import { TableResponsive } from "@components/cart/listing/style";
 import { OrdersTable } from "@components/account/orders/order.style";
 import {
   OrderDetailsHeader,

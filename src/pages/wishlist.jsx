@@ -2,7 +2,6 @@ import Head from "next/head";
 import settings from "@data/settings";
 import Layout from "@components/layout";
 import {useSelector} from "react-redux";
-import Wishlist from "@components/wishlist";
 import EmptyProduct from "@components/ui/empty";
 import Breadcrumb from "@components/ui/breadcrumb";
 
