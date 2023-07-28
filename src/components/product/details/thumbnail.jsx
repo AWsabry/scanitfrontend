@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "@components/ui/image";
 const ProductDetailsThumb = ({thumbnails}) => {
-    console.log(thumbnails);
     const settings = {
         dots: true,
         infinite: true,
@@ -25,7 +24,7 @@ const ProductDetailsThumb = ({thumbnails}) => {
                                 index={index}
                                 width={270}
                                 height={318}
-                                src={'http://api.3dscanit.org/uplodas'+item.images}
+                                src={'http://api.3dscanit.org'+item.images}
                             />
                         </div>
                         ))}
