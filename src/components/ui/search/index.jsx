@@ -37,15 +37,6 @@ const SearchForm = ({isShow, onHandler}) => {
                             <IoSearchOutline/>
                         </SearchButton>
                     </Form>
-
-                    <div className="popular-searches">
-                        <h4>Popular Searches:</h4>
-                        <ul>
-                            <li><Link href="/search/bed">bed</Link></li>
-                            <li><Link href="/search/chair">chair</Link></li>
-                        </ul>
-                    </div>
-
                     <OffCanvasCloseBtn onClick={() => onHandler()}/>
                 </div>
             </SearchBox>

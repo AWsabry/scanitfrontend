@@ -3,15 +3,32 @@ import {Container, Col, Row} from "@bootstrap";
 import ProductDetailsThumb from "@components/product/details/thumbnail";
 import ProductDetailsContent from "@components/product/details/content";
 import {ProductDetailsWrapper} from "@components/product/details/details.style";
+import axios from "axios";
+import {useState, useEffect} from "react";
 
 const ProductDetails = ({product, ...props}) => {
+    const [ galleryThumbs,setGalleryThumbs ] = useState([]);
+    useEffect(() => {
+        // Fetch gallery images
+        axios.get('http://api.3dscanit.org/gallery/'+product.id)
+            .then(response => {
+                if(response.data.Images.length > 0){
+                    setGalleryThumbs(response.data.Images);
+                }else{
+                    setGalleryThumbs(product.image);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+    }, []);
+
     return (
         <ProductDetailsWrapper className="product-details-content" {...props}>
             <Container>
                 <Row>
                     <Col md={6} lg={5}>
                         <ProductDetailsThumb
-                            thumbnails={product.image}
+                            thumbnails={galleryThumbs}
                         />
                     </Col>
 

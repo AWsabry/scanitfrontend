@@ -7,6 +7,8 @@ import {ProductImage} from "./product.style";
 
 const ProductThumbnail = ({product}) => {
     const {title, images, handle,id, image} = product;
+    console.log(image)
+
 
     return (
         <ProductImage>
@@ -28,7 +30,7 @@ const ProductThumbnail = ({product}) => {
                             alt={title}
                             width={270}
                             height={318}
-                            src={'http://api.3dscanit.org/uploads/'+image}
+                            src={'http://api.3dscanit.org/'+image}
                         />
                     )}
                 </a>

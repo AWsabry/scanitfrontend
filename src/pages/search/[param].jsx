@@ -1,16 +1,37 @@
 import Head from "next/head";
 import settings from "@data/settings";
 import Layout from "@components/layout";
-import {client, productsQuery} from "@graphql";
-import ShopProductsFeed from "@components/shop";
 import EmptyProduct from "@components/ui/empty";
 import Breadcrumb from "@components/ui/breadcrumb";
+import {useRouter} from "next/router";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import ProductsTab from "../../components/product/feed/products-tab";
 
-const SearchPage = ({products}) => {
+const SearchPage = () => {
+    const router = useRouter();
+    const [result, setResult] = useState([]);
+    useEffect(() => {
+        axios.get('http://api.3dscanit.org/get_searched_products/'+router.query.param)
+            .then(response => {
+                const mappedResult = response.data.Names.map((item) => {
+                    return {
+                        ...item,
+                        startFrom: item.start_from,
+                        reachTo: item.reach_to,
+                        image: item.image,
+                    }
+                });
+                console.log(mappedResult)
+                setResult(mappedResult);
+            }).catch(error => {
+            console.log(error)
+        })
+    }, []);
     return (
         <Layout>
             <Head>
-                <title>{"Search: " + products?.length + " Products found " + settings?.title}</title>
+                <title>{"Search: " + result?.length + " Products found " + settings?.title}</title>
                 <meta name="description" content={settings?.title}/>
             </Head>
 
@@ -20,8 +41,8 @@ const SearchPage = ({products}) => {
                 pageTitle="Search"
             />
 
-            {products?.length ? (
-                <ShopProductsFeed products={products}/>
+            {result?.length ? (
+                <ProductsTab products={result} hideHeader="yes" />
             ) : (
                 <EmptyProduct/>
             )}
@@ -30,15 +51,9 @@ const SearchPage = ({products}) => {
 };
 
 export const getServerSideProps = async ({params, query}) => {
-    const {param} = params;
-    const {sort} = query;
-    const sortKey = sort?.split("-")[0].toUpperCase();
-    const reverse = sort?.split("-")[1] !== "ascending";
-    const products = await client(productsQuery(20, sortKey, reverse, param),'getProducts/');
-
     return {
         props: {
-            products: products?.products?.edges
+            products: []
         }
     };
 };

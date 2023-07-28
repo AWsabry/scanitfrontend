@@ -77,24 +77,8 @@ const SignupForm = () => {
             axios.post('http://api.3dscanit.org/register/', variables, {
                 headers: headers
             }).then(res => {
-                // Sign the user in
-                axios.post('http://api.3dscanit.org/login/', variables,{
-                    headers: headers
-                })
-                .then(response => {
-                    setIsLoading(false);
-                    if(response){
-                        const token = response.data.token;
-                        Cookie.set("access_token", encode(token), {expires: totalDays(1)});
-                        router.push("/account");
-                    }
-                    else{
-                        setError([{message: 'Failed to login'}]);
-                    }
-                })
-                .catch(e => {
-                    setError([{message: "Something went wrong"}]);
-                })
+                // Send the user to the OTP Page
+                router.push("/otp/" + encode(formData.email));
             }).catch(err => {
                 // Show error somewhere
                 setError([{message: err.message}]);

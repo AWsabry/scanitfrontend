@@ -10,22 +10,25 @@ import {Col, Container, Row} from "@bootstrap-styled/v4";
 import {ProductNav} from "@components/product/feed/style";
 import {getFeaturedProducts, getSaleProducts, getTendingProducts} from "@utils/product";
 
-const ProductsTab = ({products, limit = 8, className}) => {
+const ProductsTab = ({products, limit = 8, className, hideHeader="no"}) => {
     const [data, setData] = useState(products);
     return (
         <div className={cn(className)}>
             <Container>
-                <Row>
-                    <Col xs={12}>
-                        <SectionTitle
-                            mb={42}
-                            align="center"
-                            title="Our Products"
-                            content="Lorem ipsum dolor sit amet, consectetur adipisicing elitsed do eiusmo tempor incididunt ut labore"
-                        />
-                    </Col>
-                </Row>
-
+                {
+                    hideHeader === "no" && (
+                        <Row>
+                            <Col xs={12}>
+                                <SectionTitle
+                                    mb={42}
+                                    align="center"
+                                    title="Our Products"
+                                    content="Lorem ipsum dolor sit amet, consectetur adipisicing elitsed do eiusmo tempor incididunt ut labore"
+                                />
+                            </Col>
+                        </Row>
+                    )
+                }
                 {(!data) && <Loader/>}
                 <Tabs>
                     {data.map(item => (
