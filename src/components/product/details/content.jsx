@@ -31,9 +31,9 @@ const ProductDetailsContent = ({product, ...props}) => {
             return;
         }
         // Decrement the download_limit
-        axios.post('http://api.3dscanit.org/update_limit/' + Cookie.get("user_email"))
+        axios.post('https://api.3dscanit.org/update_limit/' + Cookie.get("user_email"))
             .then(res => {
-                window.open('http://api.3dscanit.org/uploads/'+file);
+                window.open('https://api.3dscanit.org/uploads/'+file);
                 setDownloadLimit(res.data);
                 Cookie.set("download_limit", res.data);
             }).catch(err => {

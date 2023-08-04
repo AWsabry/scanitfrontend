@@ -10,7 +10,7 @@ const ProductDetails = ({product, ...props}) => {
     const [ galleryThumbs,setGalleryThumbs ] = useState([]);
     useEffect(() => {
         // Fetch gallery images
-        axios.get('http://api.3dscanit.org/gallery/'+product.id)
+        axios.get('https://api.3dscanit.org/gallery/'+product.id)
             .then(response => {
                 if(response.data.Images.length > 0){
                     setGalleryThumbs(response.data.Images);

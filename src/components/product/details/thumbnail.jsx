@@ -24,7 +24,7 @@ const ProductDetailsThumb = ({thumbnails}) => {
                                 index={index}
                                 width={270}
                                 height={318}
-                                src={'http://api.3dscanit.org'+item.images}
+                                src={'https://api.3dscanit.org'+item.images}
                             />
                         </div>
                         ))}

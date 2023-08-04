@@ -46,7 +46,7 @@ const DownloadForm = () => {
         }
         setIsLoading(true);
         // Send the request to backend
-        axios.post('http://api.3dscanit.org/orders//', input)
+        axios.post('https://api.3dscanit.org/orders//', input)
         .then((response) => {
             // Show success message
         }, (error) => {

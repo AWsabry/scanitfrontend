@@ -48,7 +48,7 @@ const Categories = ({categories, className, ...props}) => {
                             <Slide key={category?.id}>
                                 <Category
                                     category={category.CategoryName}
-                                    icon={`http://api.3dscanit.org/uploads/${category.image}`}
+                                    icon={`https://api.3dscanit.org/uploads/${category.image}`}
                                     slug={`/categories/${category.categorySlug}`}
                                 />
                             </Slide>

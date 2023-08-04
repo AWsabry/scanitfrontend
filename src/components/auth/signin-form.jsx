@@ -15,7 +15,7 @@ const defaultValue = {
     email: "",
     password: "",
 };
-axios.defaults.baseURL = 'http://api.3dscanit.org/';
+axios.defaults.baseURL = 'https://api.3dscanit.org/';
 
 const SigninForm = () => {
     const router = useRouter();

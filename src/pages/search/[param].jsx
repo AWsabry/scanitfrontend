@@ -12,7 +12,7 @@ const SearchPage = () => {
     const router = useRouter();
     const [result, setResult] = useState([]);
     useEffect(() => {
-        axios.get('http://api.3dscanit.org/get_searched_products/'+router.query.param)
+        axios.get('https://api.3dscanit.org/get_searched_products/'+router.query.param)
             .then(response => {
                 const mappedResult = response.data.Names.map((item) => {
                     return {

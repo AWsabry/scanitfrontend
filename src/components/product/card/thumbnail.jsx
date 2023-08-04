@@ -30,7 +30,7 @@ const ProductThumbnail = ({product}) => {
                             alt={title}
                             width={270}
                             height={318}
-                            src={'http://api.3dscanit.org/'+image}
+                            src={'https://api.3dscanit.org/'+image}
                         />
                     )}
                 </a>

@@ -74,7 +74,7 @@ const SignupForm = () => {
         if (formData.password === formData.confirm_password) {
             setIsLoading(true);
             // Send REST api request to the server
-            axios.post('http://api.3dscanit.org/register/', variables, {
+            axios.post('https://api.3dscanit.org/register/', variables, {
                 headers: headers
             }).then(res => {
                 // Send the user to the OTP Page

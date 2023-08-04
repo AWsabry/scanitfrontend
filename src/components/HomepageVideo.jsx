@@ -5,7 +5,7 @@ const HomepageVideo = () => {
 
     const [video, setVideo] = useState("");
     useEffect(() => {
-        axios.get('http://api.3dscanit.org/video')
+        axios.get('https://api.3dscanit.org/video')
              .then(response => {
                  setVideo(response.data.Video[0].video.replace("watch?v=", "embed/"))
              })
