@@ -16,6 +16,7 @@ const ProductThumbnail = ({product}) => {
                 <a>
                     {images?.edges?.length > 0 ? (
                         images?.edges?.slice(0, 2).map(({node: thumb}, idx) => (
+
                             <div key={idx} className={cn("thumb", {"hover-image": idx === 1})}>
                                 <Image
                                     alt={title}
@@ -26,12 +27,14 @@ const ProductThumbnail = ({product}) => {
                             </div>
                         ))
                     ) : (
-                        <Image
-                            alt={title}
-                            width={270}
-                            height={318}
-                            src={'https://api.3dscanit.org/'+image}
-                        />
+                        <>
+                            <Image
+                                alt={title}
+                                width={270}
+                                height={318}
+                                src={'https://api.3dscanit.org/uploads/'+image}
+                            />
+                        </>
                     )}
                 </a>
             </Link>

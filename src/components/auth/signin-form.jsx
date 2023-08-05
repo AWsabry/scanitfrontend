@@ -116,11 +116,6 @@ const SigninForm = () => {
                                                 Create an account
                                             </Link>
                                         </p>
-                                        <p>
-                                            <Link href="/" className="w-100 d-block">
-                                                Forget Password?
-                                            </Link>
-                                        </p>
                                     </Col>
                                 </Row>
                             </InputField>

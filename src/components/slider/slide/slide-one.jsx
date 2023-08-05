@@ -13,17 +13,7 @@ const SlideOne = ({subTitle, title, content, thumb}) => {
                             {subTitle && <SlideSubTitle>{subTitle}</SlideSubTitle>}
                             {title && <SlideTitle>{title}</SlideTitle>}
                             {content && <p>{content}</p>}
-                            <Button
-                                tag="a"
-                                href="/shop"
-                                color="white"
-                                bg="primary"
-                                hvrBg="black"
-                                hvrColor="primary"
-                                className="mt-4 mt-md-5"
-                            >
-                                Shop Now
-                            </Button>
+
                         </SlideContent>
                     </Col>
 

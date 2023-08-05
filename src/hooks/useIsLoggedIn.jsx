@@ -13,7 +13,10 @@ const useIsLoggedIn = () => {
      if(token){
        setIsLoggedIn(true);
        if(!Cookie.get("user_email") || !Cookie.get("user_name") || !Cookie.get("download_limit")){
-         axios.post('https://api.3dscanit.org/user', {token: token})
+           const headers = {
+               'Authorization': 'Bearer ' + token,
+           }
+         axios.post('https://api.3dscanit.org/user', {}, { headers })
              .then(response => {
                  if(!response.data.is_active){
                      alert("Your account is not active, please check your email for activation link or contact us!");

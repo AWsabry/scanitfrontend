@@ -11,8 +11,9 @@ import ProductsTab from "../../components/product/feed/products-tab";
 const SearchPage = () => {
     const router = useRouter();
     const [result, setResult] = useState([]);
+    const search = router.query.param;
     useEffect(() => {
-        axios.get('https://api.3dscanit.org/get_searched_products/'+router.query.param)
+        axios.get('https://api.3dscanit.org/get_searched_products/'+search)
             .then(response => {
                 const mappedResult = response.data.Names.map((item) => {
                     return {
@@ -22,12 +23,11 @@ const SearchPage = () => {
                         image: item.image,
                     }
                 });
-                console.log(mappedResult)
                 setResult(mappedResult);
             }).catch(error => {
             console.log(error)
         })
-    }, []);
+    }, [search]);
     return (
         <Layout>
             <Head>
@@ -48,14 +48,6 @@ const SearchPage = () => {
             )}
         </Layout>
     );
-};
-
-export const getServerSideProps = async ({params, query}) => {
-    return {
-        props: {
-            products: []
-        }
-    };
 };
 
 export default SearchPage;

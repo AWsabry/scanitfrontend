@@ -20,7 +20,7 @@ const ProductDetails = ({product, ...props}) => {
             }).catch(err => {
                 console.log(err);
             })
-    }, []);
+    }, [product]);
 
     return (
         <ProductDetailsWrapper className="product-details-content" {...props}>

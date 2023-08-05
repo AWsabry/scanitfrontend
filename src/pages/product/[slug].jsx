@@ -7,10 +7,19 @@ import Breadcrumb from "@components/ui/breadcrumb";
 import {Fragment, useState, useEffect} from "react";
 import {client, productsQuery, productQuery} from "@graphql";
 import ProductDetailsContent from "@components/product/details";
-
-const ProductDetailsPage = ({products, product}) => {
-    const productObject = product.getProduct;
+const ProductDetailsPage = () => {
     const router = useRouter();
+    const slug = router.query.slug;
+    const [productObject, setProductObject] = useState({});
+    useEffect(() => {
+        client(productQuery(slug),'getProductById/')
+            .then((response) => {
+                setProductObject(response.getProduct);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, [slug]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -44,25 +53,5 @@ const ProductDetailsPage = ({products, product}) => {
     );
 };
 
-export const getServerSideProps = async ({params}) => {
-    const {slug} = params;
-    const product = await client(productQuery(slug),'getProductById/');
-    const products = await client(productsQuery(),'getProducts/');
-
-    if (!product) {
-        throw new Error(`Product with slug '${slug}' not found`);
-    }
-
-    if (!products) {
-        throw new Error(`Products fetching error!`);
-    }
-
-    return {
-        props: {
-            product: product|| "undefiend",
-            products: products||"undefind products",
-        },
-    };
-};
 
 export default ProductDetailsPage;

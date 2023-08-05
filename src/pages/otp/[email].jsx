@@ -15,7 +15,7 @@ import {decode, encode} from "js-base64";
 import Cookie from "js-cookie";
 import {totalDays} from "@utils/method";
 const OTPPage = () => {
-    const router = useRouter()
+    const router = useRouter();
     const email = decode(router.query.email);
     const [isLoading, setIsLoading] = useState(false);
     const [otp, setOtp] = useState('');
@@ -33,31 +33,11 @@ const OTPPage = () => {
             }]);
         }else{
             // Do an Ajax request
-            axios.post('/api/otp/verify', {
-                otp: otp,
-                email: email
-            }).then(response => {
+            axios.post('https://api.3dscanit.org/checkotp/'+email+'/'+otp+'/').then(response => {
+                // TODO: Check this line
                 if(response.data.status === "success"){
-                    // Sign in
-                    axios.post('login/', variables,{
-                        headers: headers
-                    })
-                    .then(response => {
-                        setIsLoading(false);
-                        if(response){
-                            const token = response.data.token;
-                            Cookie.set("access_token", encode(token), {expires: totalDays(1)});
-                            router.push("/");
-                        }
-                        else{
-                            setError([{message: "Something went wrong"}]);
-                        }
-                    })
-                    .catch(e => {
-                        setIsLoading(false);
-                        setError([{message: e.response.data.detail}]);
-                    })
-
+                    // Redirect to signin page
+                    router.push("/signin");
                 }else{
                     setError([{
                         message: 'Your OTP is invalid!'
@@ -65,7 +45,10 @@ const OTPPage = () => {
                 }
                 setIsLoading(false);
             }).catch(error => {
-                setError([{ message: error.message}]);
+                if(error.response.data.Status == 'The User Already Active and Authenticated'){
+                    router.push("/signin");
+                }
+                setError([{ message: error.response.data.Status}]);
                 setIsLoading(false);
             })
         }
@@ -95,7 +78,7 @@ const OTPPage = () => {
                                     <Input
                                         id="otp"
                                         name="otp"
-                                        type="number"
+                                        type="text"
                                         label="OTP *"
                                         required={true}
                                         onChange={onInputChange}
