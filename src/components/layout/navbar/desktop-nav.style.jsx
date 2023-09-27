@@ -1,33 +1,42 @@
-import styled, {color, themeGet, css} from "@styled";
+import styled, { color, themeGet, css } from "@styled";
 
 export const Nav = styled.nav`
   display: flex;
-  justify-content: ${props => props.align ? props.align : 'center'};
-`
+  justify-content: ${(props) => (props.align ? props.align : "center")};
+`;
 
 export const NavList = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  gap: 2.5rem;
   margin-bottom: 0;
   padding-left: 0;
   list-style: none;
 
   & > li {
+    &:hover {
+      ul {
+        pointer-events: visible;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
     & + {
       li {
-        margin-left: 40px;
+        /* margin-left: 40px; */
       }
     }
 
     a {
       display: block;
       line-height: 60px;
-      letter-spacing: .5px;
+      letter-spacing: 0.5px;
       text-decoration: none;
       text-transform: capitalize;
-      color: ${themeGet('colors.white')};
-      font-family: ${themeGet('fonts.body')};
-      font-size: ${themeGet('fontSizes.standard')};
+      color: ${themeGet("colors.white")};
+      font-family: ${themeGet("fonts.body")};
+      font-size: ${themeGet("fontSizes.standard")};
 
       svg {
         transform: translate(2px, 3px);
@@ -47,16 +56,17 @@ export const NavList = styled.ul`
       }
     }
 
-    &:hover, &.active {
+    &:hover,
+    &.active {
       & > a {
-        color: ${themeGet('colors.primary')};
+        color: ${themeGet("colors.primary")};
       }
     }
   }
-`
+`;
 
 export const SubMenu = styled.ul`
-  background-color: ${themeGet('colors.white')};
+  background-color: ${themeGet("colors.white")};
   position: absolute;
   z-index: 2;
   text-align: left;
@@ -72,21 +82,20 @@ export const SubMenu = styled.ul`
   visibility: hidden;
 
   li {
-
     a {
       display: block;
       line-height: 19px;
       padding: 10px 0 10px 20px;
-      border-bottom: 1px solid ${themeGet('colors.borderLight')};
+      border-bottom: 1px solid ${themeGet("colors.borderLight")};
       height: 40px;
-      color: ${themeGet('colors.black')};
+      color: ${themeGet("colors.black")};
 
       &:hover {
-        color: ${themeGet('colors.primary')};
+        color: ${themeGet("colors.primary")};
       }
     }
   }
-`
+`;
 
 export const NavbarWrap = styled.div`
   ${color};
@@ -95,21 +104,24 @@ export const NavbarWrap = styled.div`
   ${NavList} {
     & > li {
       a {
-        ${({bg}) => bg !== "secondary" && css`
-          color: ${themeGet("colors.secondary")};
-        `}
+        ${({ bg }) =>
+          bg !== "secondary" &&
+          css`
+            color: ${themeGet("colors.secondary")};
+          `}
       }
 
-      &:hover, &.active {
+      &:hover,
+      &.active {
         & > a {
-          color: ${themeGet('colors.primary')};
+          color: ${themeGet("colors.primary")};
         }
 
         ul {
           li {
             a {
               &:hover {
-                color: ${themeGet('colors.primary')};
+                color: ${themeGet("colors.primary")};
               }
             }
           }
@@ -117,4 +129,4 @@ export const NavbarWrap = styled.div`
       }
     }
   }
-`
+`;

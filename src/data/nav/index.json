@@ -5,6 +5,39 @@
     "mega_menu": false
   },
   {
+    "text": "3D Models",
+    "link": "/about",
+    "mega_menu": false,
+    "submenu": [
+      {
+        "list": [
+          { "text": "Chairs", "link": "#", "badge": "badge" },
+          { "text": "Tables", "link": "#", "badge": "badge" },
+          { "text": "Sofas", "link": "#", "badge": "badge" }
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Stores",
+    "link": "/about",
+    "mega_menu": false,
+    "submenu": [
+      {
+        "list": [
+          { "text": "Add Store", "link": "#", "badge": "badge" },
+          { "text": "Our Partners", "link": "#", "badge": "badge" },
+          { "text": "Product Info", "link": "#", "badge": "badge" }
+        ]
+      }
+    ]
+  },
+  {
+    "text": "Promo Code",
+    "link": "/about",
+    "mega_menu": false
+  },
+  {
     "text": "About",
     "link": "/about",
     "mega_menu": false

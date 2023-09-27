@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle, devices, themeGet} from "@styled";
+import styled, { createGlobalStyle, devices, themeGet } from "@styled";
 
 export const GlobalStyle = createGlobalStyle`
   *,
@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   strong {
-    font-weight: ${themeGet('fontWeights.heading')};
+    font-weight: ${themeGet("fontWeights.heading")};
   }
 
   img {
@@ -56,7 +56,7 @@ export const GlobalStyle = createGlobalStyle`
 
   a {
     &:hover {
-      color: ${themeGet('colors.primary')};
+      color: ${themeGet("colors.primary")};
     }
   }
 
@@ -84,7 +84,7 @@ export const GlobalStyle = createGlobalStyle`
       border-radius: ${themeGet("radii.sm")};
 
       &:focus {
-        border-color: ${themeGet('colors.primary')};
+        border-color: ${themeGet("colors.primary")};
       }
     }
   }
@@ -110,6 +110,11 @@ export const GlobalStyle = createGlobalStyle`
 
   .mtn-30 {
     margin-top: -30px;
+  }
+
+  .my-8 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
 
   .products-grid-mobile {
@@ -193,13 +198,13 @@ export const GlobalStyle = createGlobalStyle`
       height: 25px;
       z-index: 99;
       position: absolute;
-      border-radius: ${themeGet('radii.circle')};
-      background-color: ${themeGet('colors.primary')};
+      border-radius: ${themeGet("radii.circle")};
+      background-color: ${themeGet("colors.primary")};
 
       &:before, &:after {
         left: 7px;
         width: 12px;
-        background-color: ${themeGet('colors.white')};
+        background-color: ${themeGet("colors.white")};
       }
     }
   }
@@ -222,7 +227,7 @@ export const GlobalStyle = createGlobalStyle`
       font-size: ${themeGet("fontSizes.standard")};
     }
   }
-`
+`;
 
 export const ErrorPage = styled.div`
   height: 100vh;
@@ -238,4 +243,4 @@ export const ErrorPage = styled.div`
     font-family: ${themeGet("fonts.body")};
     font-weight: ${themeGet("fontWeights.heading")};
   }
-`
+`;

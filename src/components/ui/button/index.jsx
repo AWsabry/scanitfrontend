@@ -17,7 +17,7 @@ const Button = ({ tag, children, href, loading, ...props }) => {
   return (
     <Fragment>
       {tag === "a" && (
-        <Link href={'/'} passHref>
+        <Link href={"/"} passHref>
           <StyledLink {...props}>
             {children}
             {loading && (
@@ -106,9 +106,15 @@ const StyledButton = styled.button`
       opacity: 0.5;
       pointer-events: none;
     `}
+
+    a {
+    color: #fff;
+  }
 `;
 
 const StyledLink = styled.a`
+  color: #fff;
+
   ${ButtonCSS};
 
   ${({ textTransform }) =>

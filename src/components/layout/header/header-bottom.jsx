@@ -42,8 +42,8 @@ const HeaderBottom = ({
             <Logo className="logo--desktop" src="/images/logo/logo.png" />
 
             <Logo
-              width={100}
-              height={30}
+              width={100 * 1.125}
+              height={30 * 1.125}
               className="logo--mobile"
               src="/images/logo/logo.png"
             />
@@ -79,7 +79,7 @@ const HeaderBottom = ({
                   onClick={() => setIsDropdownOpen((prevState) => !prevState)}
                 >
                   <IoPersonOutline />
-                  { isLoggedIn && user_name }
+                  {isLoggedIn && user_name}
                 </DropdownToggleButton>
 
                 <DropdownMenu
@@ -87,9 +87,9 @@ const HeaderBottom = ({
                   className={isDropdownOpen ? "show" : "hide"}
                 >
                   {isLoggedIn ? (
-                      <li>
-                        <Link href="/logout">Logout</Link>
-                      </li>
+                    <li>
+                      <Link href="/logout">Logout</Link>
+                    </li>
                   ) : (
                     <li>
                       <Link href="/signin">Signin</Link>
@@ -98,20 +98,19 @@ const HeaderBottom = ({
                   )}
                 </DropdownMenu>
               </ActionItem>
-              {(isLoggedIn) && (
-                  <Button
-                      tag="button"
-                      bg="primary"
-                      style={{ padding: 10, fontSize: 15, marginLeft: 45 }}
-                      color="white"
-                      hvrBg="secondary"
-                      onClick={() => {
-                            window.location.href = "/download";
-                          }
-                      }
-                  >
-                    Request Code
-                  </Button>
+              {isLoggedIn && (
+                <Button
+                  tag="button"
+                  bg="primary"
+                  style={{ padding: 10, fontSize: 15, marginLeft: 45 }}
+                  color="white"
+                  hvrBg="secondary"
+                  // onClick={() => {
+                  //   window.location.href = "/download";
+                  // }}
+                >
+                  <Link href="/download">Request Code</Link>
+                </Button>
               )}
             </HeaderAction>
           </Col>
