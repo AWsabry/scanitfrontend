@@ -41,7 +41,9 @@ const DownloadForm = () => {
     const input = {
       PhoneNumber: formData.phone,
       email: formData.email,
-      product: parseInt(formData.product),
+      product: isNaN(parseInt(formData.product))
+        ? parseInt(products[0].id)
+        : parseInt(formData.product),
     };
     setIsLoading(true);
     // Send the request to backend
