@@ -31,9 +31,10 @@ const Home = () => {
       <RelatedProducts
         api_endpoint="https://api.3dscanit.org/get_mostSold_products/"
         title="Most Sold Products"
-        className="my-8"
+        className="mt-16"
+        align="center"
       />
-      <Categories categories={collections} />
+      <Categories categories={collections} className="mt-4" />
       <Promotions />
       <HomepageVideo />
     </Layout>

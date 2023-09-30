@@ -11,6 +11,7 @@ import {
   OffCanvasCloseBtn,
   OffCanvasHead,
 } from "@components/ui/offCanvas/style";
+import { useIsLoggedIn } from "@hooks";
 
 const MobileNavbar = ({ isOpen, onHandler }) => {
   const onNavHandler = (e) => {
@@ -39,6 +40,8 @@ const MobileNavbar = ({ isOpen, onHandler }) => {
     });
   };
 
+  const isLoggedIn = useIsLoggedIn();
+
   return (
     <OffCanvas open={isOpen} onHandler={onHandler}>
       <OffCanvasHead>
@@ -48,36 +51,45 @@ const MobileNavbar = ({ isOpen, onHandler }) => {
 
       <MobileNav>
         <ul>
-          {navData.map((nav) => (
-            <li key={nav?.text}>
-              <Link href={nav?.link}>
-                <a
-                  onClick={(event) => onNavHandler(event)}
-                  className={cn({
-                    "mm-next-level": nav?.submenu || nav?.mega_menu,
-                  })}
-                >
-                  {nav?.text}
-                  {(nav?.submenu || nav?.mega_menu) && (
-                    <CgMathPlus className="plus" />
-                  )}
-                  {(nav?.submenu || nav?.mega_menu) && (
-                    <CgMathMinus className="minus" />
-                  )}
-                </a>
-              </Link>
-              {nav?.submenu &&
-                nav?.submenu.map((subitem, idx) => (
-                  <ul key={idx}>
-                    {subitem?.list.map((item) => (
-                      <li key={item?.text} className={item.badge}>
-                        <Link href={item?.link}>{item?.text}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                ))}
-            </li>
-          ))}
+          {navData
+            .filter((nav) => {
+              return isLoggedIn ? nav : nav.text != "Promo Code" && nav;
+              // if (isLoggedIn) {
+              //   return nav;
+              // } else {
+              //   return nav.text != "Promo Code" && nav;
+              // }
+            })
+            .map((nav) => (
+              <li key={nav?.text}>
+                <Link href={nav?.link}>
+                  <a
+                    onClick={(event) => onNavHandler(event)}
+                    className={cn({
+                      "mm-next-level": nav?.submenu || nav?.mega_menu,
+                    })}
+                  >
+                    {nav?.text}
+                    {(nav?.submenu || nav?.mega_menu) && (
+                      <CgMathPlus className="plus" />
+                    )}
+                    {(nav?.submenu || nav?.mega_menu) && (
+                      <CgMathMinus className="minus" />
+                    )}
+                  </a>
+                </Link>
+                {nav?.submenu &&
+                  nav?.submenu.map((subitem, idx) => (
+                    <ul key={idx}>
+                      {subitem?.list.map((item) => (
+                        <li key={item?.text} className={item.badge}>
+                          <Link href={item?.link}>{item?.text}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ))}
+              </li>
+            ))}
         </ul>
       </MobileNav>
     </OffCanvas>

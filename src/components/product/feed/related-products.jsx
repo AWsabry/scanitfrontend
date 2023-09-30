@@ -13,6 +13,7 @@ import axios from "axios";
 const RelatedProducts = ({
   api_endpoint,
   title,
+  align,
   products,
   categories,
   tags,
@@ -28,6 +29,7 @@ const RelatedProducts = ({
     axios
       .get(api_endpoint)
       .then((response) => {
+        console.log(response.data.Products);
         setRelatedProducts([...response.data.Products]);
       })
       .catch((err) => {
@@ -40,7 +42,7 @@ const RelatedProducts = ({
       <Container>
         <Row>
           <Col xs={12}>
-            <SectionTitle align="left" mb={[27, null, 47]} title={title} />
+            <SectionTitle align={align} mb={[27, null, 47]} title={title} />
           </Col>
         </Row>
 

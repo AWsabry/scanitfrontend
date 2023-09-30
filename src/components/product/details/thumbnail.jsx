@@ -16,6 +16,8 @@ const ProductDetailsThumb = ({ thumbnails }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  console.log(thumbnails);
+  // return null;
   return (
     <Fragment>
       <ProductThumbGallery>
@@ -28,6 +30,7 @@ const ProductDetailsThumb = ({ thumbnails }) => {
                   width={270}
                   height={318}
                   src={item.images}
+                  key={item.id}
                 />
               </div>
             ))}

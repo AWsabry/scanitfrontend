@@ -6,6 +6,7 @@ import { Container, Col, Row } from "@bootstrap";
 import { NavbarWrap, Nav, NavList, SubMenu } from "./desktop-nav.style";
 import { client, blogsQuery, productsQuery, collectionsQuery } from "@graphql";
 import { useEffect, useState } from "react";
+import { useIsLoggedIn } from "@hooks";
 
 const DesktopNav = ({ bg, className }) => {
   const [navData, setNavData] = useState([]);
@@ -26,6 +27,9 @@ const DesktopNav = ({ bg, className }) => {
       ]);
     });
   }, []);
+
+  const isLoggedIn = useIsLoggedIn();
+
   return (
     <NavbarWrap bg={bg} className={cn(className)}>
       <Container>
@@ -80,12 +84,13 @@ const DesktopNav = ({ bg, className }) => {
                     </li>
                   </SubMenu>
                 </li>
-                <li>
-                  <Link href="/contact">
-                    <a>Promo Code</a>
-                  </Link>
-                </li>
-
+                {isLoggedIn && (
+                  <li>
+                    <Link href="/contact">
+                      <a>Promo Code</a>
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link href="/about">
                     <a>About Us</a>

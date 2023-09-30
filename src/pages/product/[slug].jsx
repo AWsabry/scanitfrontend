@@ -57,6 +57,8 @@ const ProductDetailsPage = () => {
       <RelatedProducts
         api_endpoint="https://api.3dscanit.org/get_New_Products/"
         title="New Products"
+        className="mt-16"
+        align="left"
       />
     </Layout>
   );

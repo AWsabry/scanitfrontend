@@ -113,8 +113,16 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .my-8 {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .mt-4 {
+    margin-top: 2rem;
+  }
+
+  .mt-16 {
+    margin-top: 8rem;
   }
 
   .products-grid-mobile {
