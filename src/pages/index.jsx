@@ -9,9 +9,16 @@ import { client, collectionsQuery } from "@graphql";
 import HomepageVideo from "@components/HomepageVideo";
 import { useEffect, useState } from "react";
 import { RelatedProducts } from "@components/product/feed";
+// import { axios } from "axios";
+import Cookie from "js-cookie";
+import axios from "axios";
+
+// axios.defaults.baseURL = "https://api.3dscanit.org/";
 
 const Home = () => {
   const [collections, setCollections] = useState([]);
+  const user_email = Cookie.get("user_email");
+
   useEffect(() => {
     client(collectionsQuery(50), "getCategories/")
       .then((response) => {
@@ -20,7 +27,28 @@ const Home = () => {
       .catch((error) => {
         console.log(error);
       });
+
+    axios
+      .get("https://api.3dscanit.org/update_daily_limit/" + user_email)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("https://api.3dscanit.org/update_daily_limit/" + user_email)
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }, []);
+
   return (
     <Layout>
       <Head>
