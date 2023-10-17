@@ -27,6 +27,7 @@ const Contact = (props) => {
   const [error, setError] = useState([]);
   const [formData, setFormData] = useState(defaultValue);
   const [isLoading, setIsLoading] = useState(false);
+  const [successMsg, setSuccessMsg] = useState([]);
 
   const headers = {
     "Content-Type": "application/json",
@@ -42,7 +43,6 @@ const Contact = (props) => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    const target = e.target;
     const variables = {
       subject: formData.subject,
       email: formData.email,
@@ -51,14 +51,18 @@ const Contact = (props) => {
     setIsLoading(true);
     axios
       .post("contactUs/", variables, {
-        headers: headers,
+        headers,
       })
       .then((response) => {
         setIsLoading(false);
         if (response) {
           console.log(response);
+          if (response.status === 200) {
+            setSuccessMsg([
+              { message: "Your message has been sent successfully" },
+            ]);
+          }
         } else {
-          console.log("Something went wrong");
           setError([{ message: "Something went wrong" }]);
         }
       })
@@ -190,6 +194,20 @@ const Contact = (props) => {
                 >
                   <ul>
                     {error.map((item, idx) => (
+                      <li key={idx}>{item?.message}</li>
+                    ))}
+                  </ul>
+                </AlertMessage>
+              )}
+              {successMsg.length > 0 && (
+                <AlertMessage
+                  mt={3}
+                  color="success"
+                  isOpen={successMsg}
+                  onClick={() => setSuccessMsg([])}
+                >
+                  <ul>
+                    {successMsg.map((item, idx) => (
                       <li key={idx}>{item?.message}</li>
                     ))}
                   </ul>

@@ -6,6 +6,7 @@ import { placeholder } from "@utils/constant";
 import { ProductImage } from "./product.style";
 
 const ProductThumbnail = ({ product }) => {
+  console.log(product);
   const { title, images, handle, id, image } = product;
 
   return (
@@ -28,12 +29,7 @@ const ProductThumbnail = ({ product }) => {
             ))
           ) : (
             <>
-              <Image
-                alt={title}
-                width={270}
-                height={318}
-                src={"https://api.3dscanit.org/uploads/" + image}
-              />
+              <Image alt={title} width={270} height={318} src={image} />
             </>
           )}
         </a>

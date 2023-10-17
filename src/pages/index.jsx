@@ -29,7 +29,7 @@ const Home = () => {
       });
 
     axios
-      .get("https://api.3dscanit.org/update_daily_limit/" + user_email)
+      .post("https://api.3dscanit.org/update_daily_limit/" + user_email)
       .then((response) => {
         console.log(response);
       })
@@ -37,17 +37,6 @@ const Home = () => {
         console.log(e);
       });
   }, []);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("https://api.3dscanit.org/update_daily_limit/" + user_email)
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // }, []);
 
   return (
     <Layout>
