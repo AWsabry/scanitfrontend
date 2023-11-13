@@ -98,7 +98,8 @@ const HeaderBottom = ({
                   )}
                 </DropdownMenu>
               </ActionItem>
-              {isLoggedIn && (
+
+              {/* {isLoggedIn && (
                 <Button
                   tag="button"
                   bg="primary"
@@ -111,7 +112,7 @@ const HeaderBottom = ({
                 >
                   <Link href="/download">Request Code</Link>
                 </Button>
-              )}
+              )} */}
             </HeaderAction>
           </Col>
         </Row>

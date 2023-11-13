@@ -84,13 +84,27 @@ const DesktopNav = ({ bg, className }) => {
                     </li>
                   </SubMenu>
                 </li>
-                {isLoggedIn && (
-                  <li>
+                <li>
                     <Link href="/contact">
                       <a>Promo Code</a>
                     </Link>
+                    <SubMenu>
+                    <li>
+                      <Link href="/how_it_works">
+                        <a>How it works</a>
+                      </Link>
+                    </li>
+                    <li>
+                     {isLoggedIn && (
+                      <Link href="/download">
+                        <a>Ask for Promo</a>
+                      </Link>
+            )} 
+                    </li>
+                  
+                  </SubMenu>
                   </li>
-                )}
+          
                 <li>
                   <Link href="/about">
                     <a>About Us</a>

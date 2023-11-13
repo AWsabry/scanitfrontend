@@ -35,7 +35,18 @@
   {
     "text": "Promo Code",
     "link": "/about",
-    "mega_menu": false
+    "mega_menu": false,
+    
+    "submenu": [
+      {
+        
+        "list": [
+          { "text": "How it Works", "link": "#", "badge": "badge" },
+          { "text": "Ask for Promo ", "link": "/download", "badge": "badge" }
+
+        ]
+      }
+    ]
   },
   {
     "text": "About",

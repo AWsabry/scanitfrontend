@@ -4,8 +4,6 @@ import Footer from "@components/layout/footer";
 import SearchForm from "@components/ui/search";
 import {Fragment, useState, useEffect} from "react";
 import {Main} from "@components/layout/header/style";
-import SettingsSidebar from "@components/layout/settings";
-import MobileFooter from "@components/layout/mobile-footer";
 import MobileNavbar from "@components/layout/navbar/mobile-nav";
 
 const Layout = ({children, bg, ...props}) => {
@@ -55,17 +53,14 @@ const Layout = ({children, bg, ...props}) => {
                 onHandler={onSearchBoxHandler}
             />
 
-            <SettingsSidebar
-                isOpen={isShowConfig}
-                onHandler={onConfigHandler}
-            />
+
 
             <Main {...props}>
                 {children}
                 <Footer mt={[60, null, 100]}/>
             </Main>
 
-            <MobileFooter />
+           
         </Fragment>
     );
 };
